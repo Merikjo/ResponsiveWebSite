@@ -1,0 +1,42 @@
+﻿@model ResponsiveWebSite.Models.Valo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Valo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ValonTila)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValonTila)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValonMaara)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValonMaara)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Huone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Huone)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ValoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

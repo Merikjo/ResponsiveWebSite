@@ -6,15 +6,10 @@ using System.Web.Mvc;
 
 namespace ResponsiveWebSite.Controllers
 {
-    public class ResponsiveSiteController : Controller
+    public class AlytaloSiteController : Controller
     {
-        // GET: ResponsiveSite
-        public ActionResult RwdSite()
-        {
-            return View();
-        }
-
-        public ActionResult Video()
+        // GET: AlytaloSite
+        public ActionResult HomeSite()
         {
             return View();
         }

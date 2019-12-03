@@ -1,0 +1,34 @@
+﻿@model ResponsiveWebSite.Models.Lampo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lampo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TalonTavoiteLampo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TalonTavoiteLampo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TalonNykyLampo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TalonNykyLampo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LampoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

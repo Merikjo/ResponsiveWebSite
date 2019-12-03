@@ -1,0 +1,40 @@
+﻿@model ResponsiveWebSite.Models.Lampo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Lampo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TalonTavoiteLampo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TalonTavoiteLampo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TalonNykyLampo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TalonNykyLampo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

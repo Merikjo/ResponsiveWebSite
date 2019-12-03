@@ -1,21 +1,22 @@
 ﻿
 @{
-    ViewBag.Title = "RwdSite";
+    ViewBag.Title = "HomeSite";
 }
+
 
 <style>
     * {
-        box-sizing: border-box; /*Defines how the width and height of an element are calculated: should they include padding and borders, or not*/
+        box-sizing: border-box;
     }
 
     .row::after {
         content: "";
-        clear: both; /*which sides of an element floating elements are not allowed to float.*/
+        clear: both;
         display: table;
     }
 
     [class*="col-"] {
-        float: left; /*element floats to the left of its container*/
+        float: left;
         padding: 15px;
     }
 
@@ -47,14 +48,6 @@
             background-color: #cce6ff;
         }
 
-    li a {
-        display: block;
-        /*color: white;
-        text-align: center;
-        padding: 16px;*/
-        text-decoration: none;
-    }
-
     .aside {
         background-color: #cccccc;
         padding: 15px;
@@ -76,18 +69,8 @@
     [class*="col-"] {
         width: 100%;
     }
-
-    img {
-        max-width: 100%;
-        height: auto;
-        border: 1px solid #ddd;
-        padding: 5px;
-    }
 </style>
 
-
-
-<link href="~/Content/Site.css" rel="stylesheet" />
 
 <div class="header">
     <h1>Älytalon ohjaus</h1>
@@ -96,18 +79,16 @@
 <div class="row">
     <div class="col-3 col-s-3 menu">
         <ul>
-            <li><a href="~/Valot/Index" target="_blank">Valot</a></li>                                                                                         @*//https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_menu*@
-            <li><a href="~/Saunat/Index" target="_blank">Sauna</a></li>
-            <li><a href="~/Lammot/Index" target="_blank">Lämpö</a></li>
+            <li>Valot</li>
+            <li>Sauna</li>
+            <li>Lämpö</li>
             <li>Ilmastointi</li>
-            <li><a href="~/ResponsiveSite/Video" target="_blank">Video</a></li>
         </ul>
     </div>
 
     <div class="col-6 col-s-9">
         <h1>ÄlytaloApp</h1>
         <p>Tämän ohjelmiston avulla säädetään Älytalon toimintoja: Valojen säätöä, kytketään sauna päälle ja säädellään talon lämpötilaa.</p>
-        <img src="~/Images/Älypuhelin.jpg" width="460" height="547" />
     </div>
 
     <div class="col-3 col-s-12">
@@ -125,7 +106,4 @@
 <div class="footer">
     <p>Tämä sivusto on toteutettu responsiivisesti, joten se taittuu eri levyisille älylaitteille.</p>
 </div>
-
-
-
 
