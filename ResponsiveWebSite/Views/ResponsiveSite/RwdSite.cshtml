@@ -27,6 +27,7 @@
         background-color: #404040;
         color: #ffffff;
         padding: 15px;
+        display: block;
     }
 
     .menu ul {
@@ -82,6 +83,19 @@
         height: auto;
         border: 1px solid #ddd;
         padding: 5px;
+        vertical-align: baseline;
+    }
+
+    .logo {
+        max-width: 100%;
+        height: auto;
+        padding: 5px;
+        display: block;
+        text-align: left;
+    }
+
+    div.r {
+        text-align: right;
     }
 </style>
 
@@ -90,7 +104,10 @@
 <link href="~/Content/Site.css" rel="stylesheet" />
 
 <div class="header">
-    <h1>Älytalon ohjaus</h1>
+    <div class="logo">
+        <img src="~/Images/careeria_logo_230x67_once.gif" />
+        <div class="r"><h1>Älytalon ohjaus</h1></div>
+    </div>
 </div>
 
 <div class="row">

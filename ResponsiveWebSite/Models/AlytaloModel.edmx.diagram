@@ -6,8 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8d126b92c13e47a9994298fdd83b7570" Name="Diagram1">
         <EntityTypeShape EntityType="AlytaloBaseDataModel.Sauna" Width="1.5" PointX="2.75" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AlytaloBaseDataModel.Valo" Width="1.5" PointX="5.125" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AlytaloBaseDataModel.Lampo" Width="1.5" PointX="0.5" PointY="0.75" />
+        <EntityTypeShape EntityType="AlytaloBaseDataModel.Huone" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="AlytaloBaseDataModel.Valo" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="AlytaloBaseDataModel.FK_Huone" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

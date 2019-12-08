@@ -15,8 +15,19 @@ namespace ResponsiveWebSite.Models
     public partial class Valo
     {
         public int ValoID { get; set; }
-        public bool ValonTila { get; set; }
-        public string ValonMaara { get; set; }
-        public string Huone { get; set; }
+        public Nullable<int> HuoneID { get; set; }
+        public bool ValoOff { get; set; }
+        public bool ValoOn33 { get; set; }
+        public bool ValoOn66 { get; set; }
+        public bool ValoOn100 { get; set; }
+        public Nullable<System.DateTime> ValoDate33 { get; set; }
+        public Nullable<System.DateTime> ValoDate66 { get; set; }
+        public Nullable<System.DateTime> ValoDate100 { get; set; }
+        public Nullable<System.DateTime> ValoDateOff { get; set; }
+        public string ValoTila { get; set; }
+        public string ValonNimi { get; set; }
+        public string HuoneenNimi { get; set; }
+
+        public virtual Huone Huone { get; set; }
     }
 }

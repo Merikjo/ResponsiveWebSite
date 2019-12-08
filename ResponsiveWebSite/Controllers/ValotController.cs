@@ -17,7 +17,8 @@ namespace ResponsiveWebSite.Controllers
         // GET: Valot
         public ActionResult Index()
         {
-            return View(db.Valo.ToList());
+            var valo = db.Valo.Include(v => v.Huone);
+            return View(valo.ToList());
         }
 
         // GET: Valot/Details/5
@@ -38,6 +39,7 @@ namespace ResponsiveWebSite.Controllers
         // GET: Valot/Create
         public ActionResult Create()
         {
+            ViewBag.HuoneID = new SelectList(db.Huone, "HuoneID", "HuoneenNimi");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace ResponsiveWebSite.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ValoID,ValonTila,ValonMaara,Huone")] Valo valo)
+        public ActionResult Create([Bind(Include = "ValoID,HuoneID,ValoOff,ValoOn33,ValoOn66,ValoOn100,ValoDate33,ValoDate66,ValoDate100,ValoDateOff,ValoTila,ValonNimi")] Valo valo)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace ResponsiveWebSite.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.HuoneID = new SelectList(db.Huone, "HuoneID", "HuoneenNimi", valo.HuoneID);
             return View(valo);
         }
 
@@ -70,6 +73,7 @@ namespace ResponsiveWebSite.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.HuoneID = new SelectList(db.Huone, "HuoneID", "HuoneenNimi", valo.HuoneID);
             return View(valo);
         }
 
@@ -78,7 +82,7 @@ namespace ResponsiveWebSite.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ValoID,ValonTila,ValonMaara,Huone")] Valo valo)
+        public ActionResult Edit([Bind(Include = "ValoID,HuoneID,ValoOff,ValoOn33,ValoOn66,ValoOn100,ValoDate33,ValoDate66,ValoDate100,ValoDateOff,ValoTila,ValonNimi")] Valo valo)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace ResponsiveWebSite.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.HuoneID = new SelectList(db.Huone, "HuoneID", "HuoneenNimi", valo.HuoneID);
             return View(valo);
         }
 

@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AlytaloBaseDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Huone">
+          <Key>
+            <PropertyRef Name="HuoneID" />
+          </Key>
+          <Property Name="HuoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HuoneenNimi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Lampo">
           <Key>
             <PropertyRef Name="LampoID" />
@@ -27,14 +34,39 @@
             <PropertyRef Name="ValoID" />
           </Key>
           <Property Name="ValoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ValonTila" Type="bit" Nullable="false" />
-          <Property Name="ValonMaara" Type="nvarchar" MaxLength="50" />
-          <Property Name="Huone" Type="nvarchar" MaxLength="50" />
+          <Property Name="HuoneID" Type="int" />
+          <Property Name="ValoOff" Type="bit" Nullable="false" />
+          <Property Name="ValoOn33" Type="bit" Nullable="false" />
+          <Property Name="ValoOn66" Type="bit" Nullable="false" />
+          <Property Name="ValoOn100" Type="bit" Nullable="false" />
+          <Property Name="ValoDate33" Type="datetime" />
+          <Property Name="ValoDate66" Type="datetime" />
+          <Property Name="ValoDate100" Type="datetime" />
+          <Property Name="ValoDateOff" Type="datetime" />
+          <Property Name="ValoTila" Type="nvarchar" MaxLength="50" />
+          <Property Name="ValonNimi" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Huone">
+          <End Role="Huone" Type="Self.Huone" Multiplicity="0..1" />
+          <End Role="Valo" Type="Self.Valo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huone">
+              <PropertyRef Name="HuoneID" />
+            </Principal>
+            <Dependent Role="Valo">
+              <PropertyRef Name="HuoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AlytaloBaseDataModelStoreContainer">
+          <EntitySet Name="Huone" EntityType="Self.Huone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lampo" EntityType="Self.Lampo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sauna" EntityType="Self.Sauna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Valo" EntityType="Self.Valo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Huone" Association="Self.FK_Huone">
+            <End Role="Huone" EntitySet="Huone" />
+            <End Role="Valo" EntitySet="Valo" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -49,19 +81,15 @@
           <Property Name="SaunanNykyLampotila" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SaunanNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Valo">
-          <Key>
-            <PropertyRef Name="ValoID" />
-          </Key>
-          <Property Name="ValoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ValonTila" Type="Boolean" Nullable="false" />
-          <Property Name="ValonMaara" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Huone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="AlytaloBaseDataEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Sauna" EntityType="Self.Sauna" />
-          <EntitySet Name="Valo" EntityType="Self.Valo" />
           <EntitySet Name="Lampo" EntityType="AlytaloBaseDataModel.Lampo" />
+          <EntitySet Name="Huone" EntityType="AlytaloBaseDataModel.Huone" />
+          <EntitySet Name="Valo" EntityType="AlytaloBaseDataModel.Valo" />
+          <AssociationSet Name="FK_Huone" Association="AlytaloBaseDataModel.FK_Huone">
+            <End Role="Huone" EntitySet="Huone" />
+            <End Role="Valo" EntitySet="Valo" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Lampo">
           <Key>
@@ -71,6 +99,44 @@
           <Property Name="TalonTavoiteLampo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TalonNykyLampo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Huone">
+          <Key>
+            <PropertyRef Name="HuoneID" />
+          </Key>
+          <Property Name="HuoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HuoneenNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Valo" Relationship="AlytaloBaseDataModel.FK_Huone" FromRole="Huone" ToRole="Valo" />
+        </EntityType>
+        <EntityType Name="Valo">
+          <Key>
+            <PropertyRef Name="ValoID" />
+          </Key>
+          <Property Name="ValoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HuoneID" Type="Int32" />
+          <Property Name="ValoOff" Type="Boolean" Nullable="false" />
+          <Property Name="ValoOn33" Type="Boolean" Nullable="false" />
+          <Property Name="ValoOn66" Type="Boolean" Nullable="false" />
+          <Property Name="ValoOn100" Type="Boolean" Nullable="false" />
+          <Property Name="ValoDate33" Type="DateTime" Precision="3" />
+          <Property Name="ValoDate66" Type="DateTime" Precision="3" />
+          <Property Name="ValoDate100" Type="DateTime" Precision="3" />
+          <Property Name="ValoDateOff" Type="DateTime" Precision="3" />
+          <Property Name="ValoTila" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ValonNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Huone" Relationship="AlytaloBaseDataModel.FK_Huone" FromRole="Valo" ToRole="Huone" />
+        </EntityType>
+        <Association Name="FK_Huone">
+          <End Type="AlytaloBaseDataModel.Huone" Role="Huone" Multiplicity="0..1" />
+          <End Type="AlytaloBaseDataModel.Valo" Role="Valo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huone">
+              <PropertyRef Name="HuoneID" />
+            </Principal>
+            <Dependent Role="Valo">
+              <PropertyRef Name="HuoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -87,16 +153,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Valo">
-            <EntityTypeMapping TypeName="AlytaloBaseDataModel.Valo">
-              <MappingFragment StoreEntitySet="Valo">
-                <ScalarProperty Name="ValoID" ColumnName="ValoID" />
-                <ScalarProperty Name="ValonTila" ColumnName="ValonTila" />
-                <ScalarProperty Name="ValonMaara" ColumnName="ValonMaara" />
-                <ScalarProperty Name="Huone" ColumnName="Huone" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Lampo">
             <EntityTypeMapping TypeName="AlytaloBaseDataModel.Lampo">
               <MappingFragment StoreEntitySet="Lampo">
@@ -106,7 +162,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Huone">
+            <EntityTypeMapping TypeName="AlytaloBaseDataModel.Huone">
+              <MappingFragment StoreEntitySet="Huone">
+                <ScalarProperty Name="HuoneenNimi" ColumnName="HuoneenNimi" />
+                <ScalarProperty Name="HuoneID" ColumnName="HuoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Valo">
+            <EntityTypeMapping TypeName="AlytaloBaseDataModel.Valo">
+              <MappingFragment StoreEntitySet="Valo">
+                <ScalarProperty Name="ValonNimi" ColumnName="ValonNimi" />
+                <ScalarProperty Name="ValoTila" ColumnName="ValoTila" />
+                <ScalarProperty Name="ValoDateOff" ColumnName="ValoDateOff" />
+                <ScalarProperty Name="ValoDate100" ColumnName="ValoDate100" />
+                <ScalarProperty Name="ValoDate66" ColumnName="ValoDate66" />
+                <ScalarProperty Name="ValoDate33" ColumnName="ValoDate33" />
+                <ScalarProperty Name="ValoOn100" ColumnName="ValoOn100" />
+                <ScalarProperty Name="ValoOn66" ColumnName="ValoOn66" />
+                <ScalarProperty Name="ValoOn33" ColumnName="ValoOn33" />
+                <ScalarProperty Name="ValoOff" ColumnName="ValoOff" />
+                <ScalarProperty Name="HuoneID" ColumnName="HuoneID" />
+                <ScalarProperty Name="ValoID" ColumnName="ValoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
